@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>지도 생성하기</title>
+    
+</head>
+<body>
+<!-- 지도를 표시할 div 입니다 -->
+<div id="map" style="width:100%;height:750px;"></div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c2842bff2300c676739523b7747b26dc"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(35.14578737503377, 129.11319449761683), // 지도의 중심좌표
+        level: 6 // 지도의 확대 레벨
+    };
+
+// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 마커를 표시할 위치와 title 객체 배열입니다 
+var positions = [
+    {
+        title: '바다커피숍', 
+        latlng: new kakao.maps.LatLng(35.14616518028557, 129.11178231601573)
+    },
+    {
+        title: '경진커피', 
+        latlng: new kakao.maps.LatLng(35.16045800507917, 129.11366060067962)
+    },
+    {
+        title: '미화커피숍', 
+        latlng: new kakao.maps.LatLng(35.169210262268955, 129.11821163136958)
+    },
+    {
+        title: '약속', 
+        latlng: new kakao.maps.LatLng(35.17310532193886, 129.1000548620571)
+    },
+    {
+        title: '한일', 
+        latlng: new kakao.maps.LatLng(35.167531600080935, 129.1145287699972)
+    },
+    {
+        title: '누구나', 
+        latlng: new kakao.maps.LatLng(35.15940685725518, 129.11439789273638)
+    },
+    {
+        title: '오렌지다실', 
+        latlng: new kakao.maps.LatLng(35.15858501062891, 129.125328477393)
+    },
+    {
+        title: '동남', 
+        latlng: new kakao.maps.LatLng(35.17531470953722, 129.10811675411546)
+    },
+    {
+        title: '공차 광안리점', 
+        latlng: new kakao.maps.LatLng(35.155190635949864, 129.11966466204868)
+    },
+    {
+        title: '스타벅스광안리점', 
+        latlng: new kakao.maps.LatLng(35.15540957139514, 129.12088334670605)
+    },
+    {
+        title: 'CAFFE MISO(까페미소)', 
+        latlng: new kakao.maps.LatLng(35.15066537499812, 129.11079846944676)
+    },
+    {
+        title: '하나커피숖', 
+        latlng: new kakao.maps.LatLng(35.17240956638945, 129.10884330068524)
+    },
+    {
+        title: '파스쿠찌광안리점', 
+        latlng: new kakao.maps.LatLng(35.155698469125035, 129.12040590807752)
+    },
+    {
+        title: '스타벅스 남천점', 
+        latlng: new kakao.maps.LatLng(35.149141911036445, 129.11411550067422)
+    },
+    {
+        title: '커피향기', 
+        latlng: new kakao.maps.LatLng(35.13983317414382, 129.10929540807024)
+    },
+    {
+        title: '카페플로스(Cafe flos)', 
+        latlng: new kakao.maps.LatLng(35.14305856905157, 129.10816369272888)
+    },
+    {
+        title: '에코토피아', 
+        latlng: new kakao.maps.LatLng(35.14206996917248, 129.10952346204266)
+    },
+    {
+        title: '빈스빈스커피(광안점)', 
+        latlng: new kakao.maps.LatLng(35.14910446641198, 129.11459837738886)
+    },
+    {
+        title: '탐앤탐스', 
+        latlng: new kakao.maps.LatLng(35.15446181446948, 129.12449194670555)
+    },
+    {
+        title: '할리스커피 부산광안해변점', 
+        latlng: new kakao.maps.LatLng(35.15595992931121, 129.12138186204902)
+    },
+    {
+        title: '나디아컵케이크&커피', 
+        latlng: new kakao.maps.LatLng(35.157381923543056, 129.11456023876423)
+    },
+    {
+        title: '팔월애', 
+        latlng: new kakao.maps.LatLng(35.173685798296624, 129.10661379274313)
+    },
+    {
+        title: '이디야', 
+        latlng: new kakao.maps.LatLng(35.13939719988762, 129.10774224669856)
+    },
+    {
+        title: '할리스수영로터리점', 
+        latlng: new kakao.maps.LatLng(35.168501766984505, 129.11715603136906)
+    },
+    {
+        title: '카페꼬레', 
+        latlng: new kakao.maps.LatLng(35.14837439476521, 129.109556523417)
+    },
+    {
+        title: '베리굿(Very good)', 
+        latlng: new kakao.maps.LatLng(35.16586461159365, 129.11266586205372)
+    },
+    {
+        title: '더그레인(TheGrain)', 
+        latlng: new kakao.maps.LatLng(35.151806521881106, 129.11461580067552)
+    },
+    {
+        title: '설빙 민락점', 
+        latlng: new kakao.maps.LatLng(35.15467234042243, 129.12440611601977)
+    },
+    {
+        title: '이커피(E-COFFEE)', 
+        latlng: new kakao.maps.LatLng(35.15684842630634, 129.13440988533515)
+    },
+    {
+        title: '이디야', 
+        latlng: new kakao.maps.LatLng(35.16800973260351, 129.11656974671183)
+    }
+];
+
+// 마커 이미지의 이미지 주소입니다
+var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+    
+for (var i = 0; i < positions.length; i ++) {
+    
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new kakao.maps.Size(24, 35); 
+    
+    // 마커 이미지를 생성합니다    
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+    
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng, // 마커를 표시할 위치
+        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image : markerImage // 마커 이미지 
+    });
+}
+
+</script>
+</body>
+</html>
